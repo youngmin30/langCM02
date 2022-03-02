@@ -37,6 +37,23 @@ public class Member implements UserDetails {
     private boolean isCredentialsNonExpired = true; // 1 오버라이드된 메소드들의 필드
     private boolean isEnabled = true; // 1 오버라이드된 메소드들의 필드
 
+    // 13 생성 메소드 추가
+    public static Member createMember(String loginId, String loginPw, String name, String nickname, String email, Role authority ) {
+
+        Member member = new Member();
+
+        member.loginId = loginId;
+        member.loginPw = loginPw;
+
+        member.name = name;
+        member.nickname = nickname;
+        member.email = email;
+
+        member.authority = authority;
+
+        return member;
+
+    }
 
     // 5 해당 메소드들을 아래와 같이 바꾸기
     @Override
