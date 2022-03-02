@@ -79,22 +79,22 @@ public class Member implements UserDetails {
 
     @Override // 7 직접 작성함
     public boolean isAccountNonExpired(){
-        return false;
+        return isAccountNonExpired; // 4-2 리턴값을 필드 이름으로 변경
     }
 
     @Override // 7 직접 작성함
     public boolean isAccountNonLocked(){
-        return false;
+        return isAccountNonLocked; // 4-2 리턴값을 필드 이름으로 변경
     }
 
     @Override // 7 직접 작성함
     public boolean isCredentialsNonExpired(){
-        return false;
+        return isCredentialsNonExpired; // 4-2 리턴값을 필드 이름으로 변경
     }
 
     @Override // 7 직접 작성함
     public boolean isEnabled(){
-        return false;
+        return isEnabled; // 4-2 리턴값을 필드 이름으로 변경
     }
 
 }

@@ -9,9 +9,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
         Optional<Member> findByLoginId(String loginId);
         
-        // 3-3 아래 작성
-        boolean existByLoginId(String loginId);
-        boolean existByNickname(String nickname);
-        boolean existByEmail(String email);
+        // 3-3 아래 작성, 4-8 오자 수정(s 추가함)
+        boolean existsByLoginId(String loginId);
+        boolean existsByNickname(String nickname);
+        boolean existsByEmail(String email);
 
 }
