@@ -5,6 +5,17 @@ server:
 # ??? ?? ??
 spring:
 
+  devtools: # 8-11
+    livereload:
+      enabled: true
+
+    freemarker: # 8-12
+      cache: false
+
+    thymeleaf: # 8-13
+      cache: false
+
+
 # DB ??
 datasource:
   driver-class-name: com.mysql.cj.jdbc.Driver

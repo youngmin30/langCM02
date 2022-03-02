@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"> <!-- 8-10 -->
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
     <!-- 7-4 login.html 작성함 -->
 </head>
 <body>
+<div layout:fragment="content"> <!-- 8-9 -->
     <div class="container">
         <div class="contents">
             <form action="" th:action="@{~/members/doLogin}" th:object="${memberLoginForm}" method="POST">
@@ -28,5 +29,6 @@
             </form>
         </div>
     </div>
+</div> <!-- 8-9 -->
 </body>
 </html>

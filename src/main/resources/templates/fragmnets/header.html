@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <!-- 8-2 변경 -->
+<head>
+    <meta charset="UTF-8"> <!-- head 태그 안에서 타이틀 삭제 -->
+</head>
+<header th:fragment="headerFragment"> <!-- 8-3 body 태그를 지우고, header 태그 넣고 작성-->
+    <div class="header">
+        <nav>
+            <ul>
+                <a href="/" class="text">
+                    <span>여행을 떠나요</span>
+                </a>
+            </ul>
+
+            <ul>
+                <li sec:authorize="isAnonymous()">
+                    <a th:href="@{~/members/login}">로그인</a>
+                    <a th:href="@{~/members/join}">회원가입</a>
+                </li>
+
+                <li sec:authorize="isAuthenticated()">
+                    <span sec:authentication="principal.username">님</span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+</html>

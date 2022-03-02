@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}"> <!-- 8-10 -->
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
     <!-- 4-7 join.html 작성 -->
 </head>
 <body>
+<div layout:fragment="content"> <!-- 8-9 -->
+    <div class="mb-20"></div>
 <div class="container">
     <div class="contents">
         <div class="join-form"> <!-- 7-4 signup을 join으로 변경 -->
@@ -56,5 +59,6 @@
         </div>
     </div>
 </div>
+</div> <!-- 8-9 -->
 </body>
 </html>

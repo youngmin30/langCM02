@@ -35,6 +35,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation' // 4-3 의존성 주입
 
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // 8-1 타임리프 레이아웃 관련 의존성 주입
+
 
 }
 
