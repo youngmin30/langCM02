@@ -5,8 +5,10 @@
     <meta charset="UTF-8"> <!-- 8-5 head 태그 안에서 타이틀 삭제 -->
     <script src="https://cdn.tailwindcss.com"></script> <!-- 8-6 테일윈드 사용하므로 추가 -->
     <link rel="stylesheet" href="/css/common.css"> <!-- 9-2 -->
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.3.4/dist/flowbite.min.css" /> <!-- 10-4 flowbite include via CDN에서 스타일시트 사용을 위한 태그 추가 -->
 </head>
 <body>
+    <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script> <!-- 10-4 flowbite include via CDN에서 스타일시트 사용을 위한 태그 추가 -->
     <haeder th:replace="fragments/header::headerFragments"></haeder> <!-- 8-7 -->
     <div layout:fragment="content"></div> <!-- 8-8 -->
 </body>

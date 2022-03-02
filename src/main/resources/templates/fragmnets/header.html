@@ -19,8 +19,30 @@
                     <a th:href="@{~/members/join}">회원가입</a>
                 </li>
 
-                <li sec:authorize="isAuthenticated()">
-                    <span sec:authentication="principal.username">님</span>
+                <li sec:authorize="isAuthenticated()"> <!-- 10-1 header에 flowbite에서 dropdownmenu 추가 및 작성 -->
+                    <button id="dropdownButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdownInformation" class="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"> <!-- 10-2 div id 변경, dark:divide-gray-600 추가 -->
+                        <ul class="py-1" aria-labelledby="dropdownButton">
+                            <!-- <li>
+                                 <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"></a>
+                            </li> -->
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">게시물 작성</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">회원정보 수정</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">로그아웃</a>
+                            </li>
+                            <!-- 10-2 아래 부분 태그 분리해서 수정함 -->
+                            <li sec:authorize="isAuthenticated()">
+                                <span sec:authentication="principal.username">&nbsp;님</span> <!-- 10-3 님 앞에 공백 추가 -->
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </nav>
