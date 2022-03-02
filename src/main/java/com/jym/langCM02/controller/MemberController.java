@@ -1,5 +1,6 @@
 package com.jym.langCM02.controller;
 
+import com.jym.langCM02.dto.MemberLoginForm;
 import com.jym.langCM02.dto.MemberSaveForm;
 import com.jym.langCM02.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,13 @@ public class MemberController { // 8 Member Entity 만든 후 MemberController �
                 return "usr/member/signup";
             }
             return "redirect:/";
+        }
+
+        // 7-3 회원가입 로직 아래, login.html로 이동하는 로직 작성
+        public String showLogin(Model model){
+
+            model.addAttribute("memberLoginForm", new MemberLoginForm());
+            return "usr/member/login";
         }
 
 }
