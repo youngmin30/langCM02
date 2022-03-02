@@ -1,0 +1,12 @@
+/* 9-1 static 폴더에 js, css 디렉토리 만들고 충북대직지체 폰트 추가 코드 작성함 */
+@font-face {
+    font-family: 'CBNUJIKJI';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/CBNUJIKJI.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family : "CBNUJIKJI";
+}
+
