@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +29,9 @@ public class Member implements UserDetails {
     private String name;
     private String nickname;
     private String email;
+
+    private LocalDateTime regDate = LocalDateTime.now(); // 11-1 Member에 등록일과 수정일 추가
+    private LocalDateTime updateDate = LocalDateTime.now(); // 11-1 Member에 등록일과 수정일 추가
 
     @Enumerated(EnumType.STRING) // 4 Role.enum을 만든 후 이곳에서 사용함
     private Role authority;
