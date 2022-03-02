@@ -20,7 +20,7 @@ public class MemberController { // 8 Member Entity 만든 후 MemberController �
         @GetMapping("/members/join")
         public String showSignup(Model model) {
             model.addAttribute("memberSaveForm", new MemberSaveForm());
-            return "usr/member/signup";
+            return "usr/member/join";
         }
 
         // 4-5 회원가입 페이지에서 확인을 누르면 회원가입이 이루어지는 로직 작성
@@ -28,7 +28,7 @@ public class MemberController { // 8 Member Entity 만든 후 MemberController �
         public String doSignup(@Validated MemberSaveForm memberSaveForm, BindingResult bindingResult, Model model) {
 
             if(bindingResult.hasErrors()){
-                return "usr/member/signup";
+                return "usr/member/join";
             }
             try {
                 memberService.save(memberSaveForm);
