@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .mvcMatchers(
                                 "/articles/**",
                                 "/", // 6-4 index의 url인 "/" 추가하고, 위 라인에 , 추가
-                                "/members/modify" // 12-2 modify.html 추가
+                                "/members/modify", // 12-2 modify.html 추가
+                                "boards/add" // 13-6
                         )
                         .permitAll()
                         .mvcMatchers(

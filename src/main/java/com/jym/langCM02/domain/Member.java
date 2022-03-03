@@ -20,6 +20,7 @@ import java.util.List;
 public class Member implements UserDetails {
 
     @Id
+    @Column(name = "member_id") // 13-2 추가
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 2 DB의 PK에 연결할 id
 

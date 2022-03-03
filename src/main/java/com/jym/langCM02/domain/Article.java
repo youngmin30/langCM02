@@ -21,6 +21,11 @@ public class Article { // 8-3-1 Article 객체 만들기
     @JoinColumn(name = "member_id")
     private Member member;
 
+
+    @ManyToOne(fetch = FetchType.LAZY) // 13-3
+    @JoinColumn(name = "boader_id") // 13-3
+    private Board board; // 13-3
+
     private LocalDateTime regDate = LocalDateTime.now();
     private LocalDateTime updateDate = LocalDateTime.now();
 
