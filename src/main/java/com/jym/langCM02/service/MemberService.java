@@ -3,6 +3,7 @@ package com.jym.langCM02.service;
 import com.jym.langCM02.config.Role;
 import com.jym.langCM02.dao.MemberRepository;
 import com.jym.langCM02.domain.Member;
+import com.jym.langCM02.dto.MemberModifyForm;
 import com.jym.langCM02.dto.MemberSaveForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true) // 4-*
@@ -70,6 +73,35 @@ public class MemberService implements UserDetailsService { // 9 MemberController
 
         memberRepository.save(member);
 
+    }
+
+    //========== 12이전 단계에서 빠져 있어서 추가한 부분 ========== //
+    public Member findByLoginId(String loginId) throws IllegalStateException {
+
+        Optional<Member> memberOptional = memberRepository.findByLoginId(loginId);
+
+        memberOptional.orElseThrow(
+                () -> new IllegalStateException("존재하지 않는 회원입니다.")
+        );
+
+        return memberOptional.get();
+
+    }
+    // 12-5 modifyMember 추가한 부분
+    @Transactional
+    public Long modifyMember(MemberModifyForm memberModifyForm, String loginId){
+
+        Member findMember = findByLoginId(loginId);
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+        findMember.modifyMember(
+                bCryptPasswordEncoder.encode(memberModifyForm.getLoginPw()), // MemberModifyForm에서 @Data가 있어야 이곳에서 사용할 수 있음.
+                memberModifyForm.getNickname(),
+                memberModifyForm.getEmail()
+        );
+
+        return findMember.getId();
     }
 
 }

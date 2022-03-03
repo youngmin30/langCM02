@@ -59,6 +59,14 @@ public class Member implements UserDetails {
 
     }
 
+    // 12-4 modifyMember 작성
+    public void modifyMember(String loginPw, String nickname, String email) {
+        this.loginPw = loginPw;
+        this.nickname = nickname;
+        this.email = email;
+    }
+
+
     // 5 해당 메소드들을 아래와 같이 바꾸기
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

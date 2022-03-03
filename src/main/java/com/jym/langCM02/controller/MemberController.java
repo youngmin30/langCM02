@@ -1,6 +1,8 @@
 package com.jym.langCM02.controller;
 
+import com.jym.langCM02.domain.Member;
 import com.jym.langCM02.dto.MemberLoginForm;
+import com.jym.langCM02.dto.MemberModifyForm;
 import com.jym.langCM02.dto.MemberSaveForm;
 import com.jym.langCM02.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,7 +39,7 @@ public class MemberController { // 8 Member Entity 만든 후 MemberController �
                 memberService.save(memberSaveForm);
             } catch (Exception e) {
                 model.addAttribute("err_msg", e.getMessage());
-                return "usr/member/signup";
+                return "usr/member/join"; // 이전 단계에서 signup을 join으로 바꾼 것
             }
             return "redirect:/";
         }
@@ -45,6 +49,27 @@ public class MemberController { // 8 Member Entity 만든 후 MemberController �
 
             model.addAttribute("memberLoginForm", new MemberLoginForm());
             return "usr/member/login";
+        }
+
+        // 12-6 member modify 로직 작성
+        @GetMapping("/members/modify")
+        public String showModify(Model model, Principal principal){
+            Member findMember = memberService.findByLoginId(principal.getName());
+
+            model.addAttribute("member", findMember);
+            model.addAttribute("membermodifyForm", new MemberModifyForm());
+
+            return "usr/member/modify";
+        }
+
+        public String doModify(MemberModifyForm memberModifyForm, Principal principal, Model model){
+            try{
+                memberService.modifyMember(memberModifyForm, principal.getName());
+            } catch (Exception e){
+                model.addAttribute("err_msg", e.getMessage());
+                return "usr/member/modify";
+            }
+            return "redirect:/";
         }
 
 }
