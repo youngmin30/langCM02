@@ -3,8 +3,8 @@ package com.jym.langCM02.service;
 import com.jym.langCM02.config.Role;
 import com.jym.langCM02.dao.MemberRepository;
 import com.jym.langCM02.domain.Member;
-import com.jym.langCM02.dto.MemberModifyForm;
-import com.jym.langCM02.dto.MemberSaveForm;
+import com.jym.langCM02.dto.member.MemberModifyForm;
+import com.jym.langCM02.dto.member.MemberSaveForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -75,7 +75,7 @@ public class MemberService implements UserDetailsService { // 9 MemberController
 
     }
 
-    //========== 12이전 단계에서 빠져 있어서 추가한 부분 ========== //
+    //========== 12이전 단계에서 빠져 있어서 추가한 부분 ========== // // 8-3-8
     public Member findByLoginId(String loginId) throws IllegalStateException {
 
         Optional<Member> memberOptional = memberRepository.findByLoginId(loginId);
@@ -87,6 +87,8 @@ public class MemberService implements UserDetailsService { // 9 MemberController
         return memberOptional.get();
 
     }
+    // === 8-3-8
+
     // 12-5 modifyMember 추가한 부분
     @Transactional
     public Long modifyMember(MemberModifyForm memberModifyForm, String loginId){

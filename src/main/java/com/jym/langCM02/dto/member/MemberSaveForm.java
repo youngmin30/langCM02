@@ -1,4 +1,5 @@
-package com.jym.langCM02.dto;
+// package com.jym.langCM02.dto;
+package com.jym.langCM02.dto.member; // 8-3-7
 
 import lombok.Data;
 

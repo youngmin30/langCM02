@@ -30,6 +30,10 @@ public class Member implements UserDetails {
     private String nickname;
     private String email;
 
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)  // 8-3-6
+    private List<Article> articles = new ArrayList<>(); // 8-3-6
+
     private LocalDateTime regDate = LocalDateTime.now(); // 11-1 Member에 등록일과 수정일 추가
     private LocalDateTime updateDate = LocalDateTime.now(); // 11-1 Member에 등록일과 수정일 추가
 

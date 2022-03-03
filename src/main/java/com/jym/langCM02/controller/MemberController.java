@@ -1,9 +1,9 @@
 package com.jym.langCM02.controller;
 
 import com.jym.langCM02.domain.Member;
-import com.jym.langCM02.dto.MemberLoginForm;
-import com.jym.langCM02.dto.MemberModifyForm;
-import com.jym.langCM02.dto.MemberSaveForm;
+import com.jym.langCM02.dto.member.MemberLoginForm;
+import com.jym.langCM02.dto.member.MemberModifyForm;
+import com.jym.langCM02.dto.member.MemberSaveForm;
 import com.jym.langCM02.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
