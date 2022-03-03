@@ -1,12 +1,14 @@
 package com.jym.langCM02.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter // 15-1 게시판 디테일 구현
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Article { // 8-3-1 Article 객체 만들기
 

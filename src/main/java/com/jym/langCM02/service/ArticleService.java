@@ -3,12 +3,10 @@ package com.jym.langCM02.service;
 import com.jym.langCM02.dao.ArticleRepository;
 import com.jym.langCM02.domain.Article;
 import com.jym.langCM02.domain.Member;
-import com.jym.langCM02.dto.ArticleSaveForm;
+import com.jym.langCM02.dto.article.ArticleSaveForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)

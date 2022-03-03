@@ -1,7 +1,7 @@
 package com.jym.langCM02.controller;
 
 import com.jym.langCM02.domain.Member;
-import com.jym.langCM02.dto.ArticleSaveForm;
+import com.jym.langCM02.dto.article.ArticleSaveForm;
 import com.jym.langCM02.service.ArticleService;
 import com.jym.langCM02.service.MemberService;
 
