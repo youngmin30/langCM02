@@ -35,11 +35,13 @@ public class ArticleService {
         article.setBoard(board);
         articleRepository.save(article);
     }
+
     public ArticleDTO getArticle(Long id) throws NoSuchElementException {
         Article findArticle = getById(id);
         ArticleDTO articleDTO = new ArticleDTO(findArticle);
         return articleDTO;
     }
+
     public Optional<Article> findById(Long id){
         return articleRepository.findById(id);
     }

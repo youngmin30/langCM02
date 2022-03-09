@@ -12,6 +12,6 @@ public class ArticleSaveForm { // 8-3-1
     @NotBlank
     private String body;
 
-    private Long board_id;
+    private Long board_id; // 34 게시글 작성 로직 개선
 
 }

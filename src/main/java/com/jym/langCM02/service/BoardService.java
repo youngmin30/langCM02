@@ -20,7 +20,9 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class BoardService {
+
     private final BoardRepository boardRepository;
+
     @Transactional
     public void save(BoardSaveForm boardSaveForm){
         Board board = Board.createBoard(
@@ -53,15 +55,18 @@ public class BoardService {
         boardOptional.orElseThrow(
                 () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다.")
         );
+
         Board findBoard = boardOptional.get();
         List<ArticleListDTO> articleList = new ArrayList<>();
         List<Article> articles = findBoard.getArticles();
+
         for(Article article : articles){
             ArticleListDTO articleListDTO = new ArticleListDTO(article);
             articleList.add(articleListDTO);
         }
         return new BoardDTO(findBoard, articleList);
     }
+
     @Transactional
     public Long modify(Long id, BoardModifyForm boardModifyForm) throws NoSuchElementException{
         Optional<Board> boardOptional = boardRepository.findById(id);
@@ -75,6 +80,7 @@ public class BoardService {
         );
         return board.getId();
     }
+
     @Transactional
     public void delete(Long id) {
         Optional<Board> boardOptional = findById(id);

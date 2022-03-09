@@ -26,9 +26,11 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class ArticleController {
+
     private final ArticleService articleService;
     private final MemberService memberService;
-    private final BoardService boardService;
+    private final BoardService boardService; // 34 게시글 작성 로직 개선
+
     @GetMapping("/boards/{id}/articles/write")
     public String showArticleWrite(@PathVariable(name = "id")Long id, Model model) {
         BoardDTO boardDetail = boardService.getBoardDetail(id);
@@ -42,12 +44,12 @@ public class ArticleController {
             return "usr/article/write";
         }
         try {
-            Board findBoard = boardService.getBoard(articleSaveForm.getBoard_id());
+            Board findBoard = boardService.getBoard(articleSaveForm.getBoard_id()); // 34 게시글 작성 로직 개선
             Member findMember = memberService.findByLoginId(principal.getName());
             articleService.save(
                     articleSaveForm,
-                    findMember,
-                    findBoard
+                    findMember, // 34 게시글 작성 로직 개선
+                    findBoard // 34 게시글 작성 로직 개선
             );
         } catch (IllegalStateException e) {
             model.addAttribute("err_msg", e.getMessage());
