@@ -76,5 +76,17 @@ public class ArticleService { // 8-3-4
         return articleDTOList;
     }
 
+    // 21-2 게시물 삭제 구현
+    public ArticleDTO getArticle(Long id) throws NoSuchElementException {
+        Article findArticle = getById(id);
+        ArticleDTO articleDTO = new ArticleDTO(findArticle);
+
+        return articleDTO;
+    }
+
+    public void delete(Long id){
+        Article findArticle = getById(id);
+        articleRepository.delete(findArticle);
+    }
 
 }

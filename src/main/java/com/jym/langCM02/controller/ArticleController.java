@@ -99,4 +99,21 @@ public class ArticleController { // 8-3-5
         return "usr/article/list";
     }
 
+    // 21-1 게시물 삭제 구현
+    @GetMapping("/articles/delete/{id}")
+    public String deleteArticle(@PathVariable(name = "id") Long id, Principal principal) {
+        try {
+            ArticleDTO article = articleService.getArticle(id);
+
+            if(article.getAuthorName() != principal.getName()) {
+                return "redirect:/";
+            }
+            articleService.delete(id);
+            return "redirect:/";
+
+        } catch (Exception e) {
+            return "redirect:/";
+        }
+    }
+
 }
