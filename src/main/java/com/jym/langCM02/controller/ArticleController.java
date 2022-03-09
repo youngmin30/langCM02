@@ -2,6 +2,7 @@ package com.jym.langCM02.controller;
 
 import com.jym.langCM02.domain.Article;
 import com.jym.langCM02.domain.Member;
+import com.jym.langCM02.dto.article.ArticleDTO;
 import com.jym.langCM02.dto.article.ArticleModifyForm;
 import com.jym.langCM02.dto.article.ArticleSaveForm;
 import com.jym.langCM02.service.ArticleService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -85,6 +87,16 @@ public class ArticleController { // 8-3-5
             return "usr/article/modify";
         }
 
+    }
+
+    // 20-3 게시물 리스트 구현
+    @GetMapping("/articles/")
+    public String showList(Model model){
+
+        List<ArticleDTO> articleList = articleService.getList();
+        model.addAttribute("articleList", articleList);
+
+        return "usr/article/list";
     }
 
 }

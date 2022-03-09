@@ -3,12 +3,15 @@ package com.jym.langCM02.service;
 import com.jym.langCM02.dao.ArticleRepository;
 import com.jym.langCM02.domain.Article;
 import com.jym.langCM02.domain.Member;
+import com.jym.langCM02.dto.article.ArticleDTO;
 import com.jym.langCM02.dto.article.ArticleModifyForm;
 import com.jym.langCM02.dto.article.ArticleSaveForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -59,5 +62,19 @@ public class ArticleService { // 8-3-4
                 articleModifyForm.getBody()
         );
     }
+
+    // 20-2 게시물 리스트 구현 - ArticleDTO 작성 후 아래 작성함
+    public List<ArticleDTO> getList() {
+        List<Article> articleList = articleRepository.findAll();
+
+        List<ArticleDTO> articleDTOList = new ArrayList<>();
+
+        for (Article article : articleList ) {
+            ArticleDTO articleDTO = new ArticleDTO(article);
+            articleDTOList.add(articleDTO);
+        }
+        return articleDTOList;
+    }
+
 
 }

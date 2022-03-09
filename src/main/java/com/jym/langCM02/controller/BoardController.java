@@ -1,6 +1,7 @@
 package com.jym.langCM02.controller;
 
 import com.jym.langCM02.domain.Board;
+import com.jym.langCM02.dto.article.ArticleDTO;
 import com.jym.langCM02.dto.board.BoardDTO;
 import com.jym.langCM02.dto.board.BoardModifyForm;
 import com.jym.langCM02.dto.board.BoardSaveForm;
@@ -77,5 +78,18 @@ public class BoardController { // 13-6
     }
 
     // 19-5 게시물 수정 구현에서 삭제함
+
+    // 20-3 게시물 리스트 구현 - ArticleService 작성 후 아래 작성함
+    @GetMapping("/boards/delete/{id}")
+    public String doDeleteBoard(@PathVariable(name = "id") Long id) {
+
+        try {
+            boardService.delete(id);
+            return "adm/board/list";
+        } catch (Exception e) {
+            return "adm/board/list";
+        }
+
+    }
 
 }
