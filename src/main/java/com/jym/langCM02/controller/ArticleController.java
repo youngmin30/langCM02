@@ -116,4 +116,15 @@ public class ArticleController { // 8-3-5
         }
     }
 
+    public String showDetail(@PathVariable(name="id") Long id, Model model) {
+        try {
+            ArticleDTO findArticle = articleService.getArticle(id);
+            model.addAttribute("article", findArticle);
+
+            return "usr/article/detail";
+        } catch (Exception e) {
+            return "redirect:/";
+        }
+    }
+
 }
