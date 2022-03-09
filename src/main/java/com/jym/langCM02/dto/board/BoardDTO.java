@@ -15,7 +15,7 @@ public class BoardDTO { // 15-4 게시판 디테일 구현
     private String name;
     private String detail;
 
-    private List<ArticleListDTO> articleListDTOList;
+    private List<ArticleListDTO> articleListDTO;
 
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
@@ -25,7 +25,7 @@ public class BoardDTO { // 15-4 게시판 디테일 구현
         this.id = board.getId();
         this.name = board.getName();
         this.detail = board.getDetail();
-        this.articleListDTOList = articleListDTO;
+        this.articleListDTO = articleListDTO;
         this.regDate = board.getRegDate();
         this.updateDate = board.getUpdateDate();
     }
