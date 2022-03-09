@@ -1,6 +1,8 @@
 package com.jym.langCM02.controller;
 
+import com.jym.langCM02.domain.Article;
 import com.jym.langCM02.domain.Member;
+import com.jym.langCM02.dto.article.ArticleModifyForm;
 import com.jym.langCM02.dto.article.ArticleSaveForm;
 import com.jym.langCM02.service.ArticleService;
 import com.jym.langCM02.service.MemberService;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
@@ -56,6 +59,32 @@ public class ArticleController { // 8-3-5
 
     }
 
+    // 19-4 게시물 수정 구현
+    @GetMapping("/articles/modify/{id}")
+    public String showModify(@PathVariable(name = "id") Long id, Model model){
 
+        try {
+            Article article = articleService.getById(id);
+            model.addAttribute("articleModifyForm", new ArticleModifyForm(
+                    article.getTitle(),
+                    article.getBody()
+            ));
+            return "usr/article/modify";
+        }catch (Exception e){
+            return "redirect:/";
+        }
+    }
+
+    @PostMapping("/articles/modify/{id}")
+    public String doModify(@PathVariable(name = "id") Long id, ArticleModifyForm articleModifyForm){
+
+        try{
+            articleService.modifyArticle(articleModifyForm, id);
+            return "redirect:/article/"+ id;
+        }catch (Exception e){
+            return "usr/article/modify";
+        }
+
+    }
 
 }

@@ -76,14 +76,6 @@ public class BoardController { // 13-6
         return "redirect:/";
     }
 
-    // 18-2 게시판 삭제 구현
-    @GetMapping("/boards/delete/{id}")
-    public String doDeleteBoard(@PathVariable(name="id") Long id) {
-        try {
-            boardService.delete(id);
-            return "adm/board/list";
-        } catch (Exception e) {
-            return "adm/board/list";
-        }
-    }
+    // 19-5 게시물 수정 구현에서 삭제함
+
 }

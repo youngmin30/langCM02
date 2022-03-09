@@ -43,6 +43,14 @@ public class Article { // 8-3-1 Article 객체 만들기
         return article;
     }
 
+    // 19-2 게시물 수정 구현
+    public void modifyArticle(String title, String body){
+        this.title = title;
+        this.body = body;
+
+        this.updateDate = LocalDateTime.now();
+    }
+
     // 연관관계 메소드
     public void setMember(Member member) {
         this.member = member;
