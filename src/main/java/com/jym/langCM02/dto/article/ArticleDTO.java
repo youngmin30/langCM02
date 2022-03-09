@@ -5,12 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-// 20-1 게시물 리스트 구현 - ArticleDTO 새로 만듦
 @Data
 public class ArticleDTO {
-
     private Long id;
-
     private String title;
     private String body;
 
@@ -22,14 +19,12 @@ public class ArticleDTO {
     private LocalDateTime regDate;
     private LocalDateTime updateDate;
 
+
     public ArticleDTO(Article article) {
-
         this.id = article.getId();
-
         this.title = article.getTitle();
-
-        this.authorName = article.getMember().getNickname();
         this.body = article.getBody();
+        this.authorName = article.getMember().getNickname();
 
         this.boardId = article.getBoard().getId();
         this.boardName = article.getBoard().getName();
@@ -37,5 +32,4 @@ public class ArticleDTO {
         this.regDate = article.getRegDate();
         this.updateDate = article.getUpdateDate();
     }
-
 }

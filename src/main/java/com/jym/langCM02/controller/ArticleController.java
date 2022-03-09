@@ -26,11 +26,9 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class ArticleController {
-
     private final ArticleService articleService;
     private final MemberService memberService;
     private final BoardService boardService;
-
     @GetMapping("/boards/{id}/articles/write")
     public String showArticleWrite(@PathVariable(name = "id")Long id, Model model) {
         BoardDTO boardDetail = boardService.getBoardDetail(id);
@@ -59,12 +57,12 @@ public class ArticleController {
     }
     @GetMapping("/articles/modify/{id}")
     public String showModify(@PathVariable(name = "id") Long id, Model model){
+
         try {
-            Article article = articleService.getById(id);
-            model.addAttribute("articleModifyForm", new ArticleModifyForm(
-                    article.getTitle(),
-                    article.getBody()
-            ));
+            ArticleDTO article = articleService.getArticle(id);
+
+            model.addAttribute("article", article);
+
             return "usr/article/modify";
         }catch (Exception e){
             return "redirect:/";
@@ -72,8 +70,12 @@ public class ArticleController {
     }
     @PostMapping("/articles/modify/{id}")
     public String doModify(@PathVariable(name = "id") Long id, ArticleModifyForm articleModifyForm){
+
         try{
-            articleService.modifyArticle(articleModifyForm, id);
+
+            Board findBoard = boardService.getBoard(articleModifyForm.getBoard_id());
+
+            articleService.modifyArticle(articleModifyForm, findBoard, id);
             return "redirect:/article/"+ id;
         }catch (Exception e){
             return "usr/article/modify";
@@ -81,14 +83,10 @@ public class ArticleController {
     }
     @GetMapping("/articles")
     public String showList(Model model) {
-
         List<ArticleDTO> articleList = articleService.getList();
-
         ArticleDTO articleDTO = articleList.get(0);
-
         model.addAttribute("boardName", articleDTO.getBoardName());
         model.addAttribute("articleList", articleList);
-
         return "usr/article/list";
     }
     @GetMapping("/articles/delete/{id}")

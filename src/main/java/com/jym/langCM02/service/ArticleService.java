@@ -20,12 +20,13 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ArticleService {
+
     private final ArticleRepository articleRepository;
 
     @Transactional
     public void save(ArticleSaveForm articleSaveForm, Member member, Board board) {
 
-        Article article = Article.createArticle(
+       Article article = Article.createArticle(
                 articleSaveForm.getTitle(),
                 articleSaveForm.getBody()
         );
@@ -33,7 +34,6 @@ public class ArticleService {
         article.setMember(member);
         article.setBoard(board);
         articleRepository.save(article);
-
     }
     public ArticleDTO getArticle(Long id) throws NoSuchElementException {
         Article findArticle = getById(id);
@@ -51,14 +51,19 @@ public class ArticleService {
         );
         return articleOptional.get();
     }
+
     @Transactional
-    public void modifyArticle(ArticleModifyForm articleModifyForm, Long id){
+    public void modifyArticle(ArticleModifyForm articleModifyForm, Board board,  Long id){
         Article findArticle = getById(id);
+
         findArticle.modifyArticle(
                 articleModifyForm.getTitle(),
                 articleModifyForm.getBody()
         );
+
+        findArticle.setBoard(board);
     }
+
     public List<ArticleDTO> getList() {
         List<Article> articleList = articleRepository.findAll();
         List<ArticleDTO> articleDTOList = new ArrayList<>();
