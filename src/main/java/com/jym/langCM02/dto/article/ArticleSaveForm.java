@@ -12,4 +12,6 @@ public class ArticleSaveForm { // 8-3-1
     @NotBlank
     private String body;
 
+    private Long board_id;
+
 }

@@ -24,54 +24,54 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public void save(BoardSaveForm boardSaveForm) {
-
+    public void save(BoardSaveForm boardSaveForm){
         Board board = Board.createBoard(
                 boardSaveForm.getName(),
                 boardSaveForm.getDetail()
         );
-
         boardRepository.save(board);
-
     }
 
-    // 14-2
     public List<Board> findAll() {
         return boardRepository.findAll();
     }
 
-    // // 15-5 게시판 디테일 구현
-    public Optional<Board> findById(Long id) {
-        return boardRepository.findById(id);
+        public Optional<Board> findById(Long id) {
+            return boardRepository.findById(id);
+        }
+
+        public Board getBoard(Long id){
+
+            Optional<Board> boardOptional = boardRepository.findById(id);
+
+            boardOptional.orElseThrow(
+                    () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다")
+            );
+
+            return boardOptional.get();
     }
 
     public BoardDTO getBoardDetail(Long id) {
-        Optional<Board> boardOptional = findById(id);
 
+        Optional<Board> boardOptional = findById(id);
         boardOptional.orElseThrow(
                 () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다.")
         );
-
         Board findBoard = boardOptional.get();
-
         List<ArticleListDTO> articleList = new ArrayList<>();
         List<Article> articles = findBoard.getArticles();
 
-        for (Article article : articles) {
+
+        for(Article article : articles){
             ArticleListDTO articleListDTO = new ArticleListDTO(article);
             articleList.add(articleListDTO);
         }
 
         return new BoardDTO(findBoard, articleList);
-
     }
-
-    // // 17-4 게시판 수정 구현
     @Transactional
     public Long modify(Long id, BoardModifyForm boardModifyForm) throws NoSuchElementException{
-
         Optional<Board> boardOptional = boardRepository.findById(id);
-
         boardOptional.orElseThrow(
                 () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다.")
         );
@@ -82,21 +82,16 @@ public class BoardService {
                 boardModifyForm.getName(),
                 boardModifyForm.getDetail()
         );
-
         return board.getId();
     }
-
-    // 18-1 게시판 삭제 구현
     @Transactional
     public void delete(Long id) {
-
         Optional<Board> boardOptional = findById(id);
-
         boardOptional.orElseThrow(
                 () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다.")
         );
         Board findBoard = boardOptional.get();
-
         boardRepository.delete(findBoard);
     }
 }
+

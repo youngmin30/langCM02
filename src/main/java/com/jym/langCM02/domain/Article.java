@@ -57,4 +57,15 @@ public class Article { // 8-3-1 Article 객체 만들기
         member.getArticles().add(this); // ========
     }
 
+    // 28-3 게시글 작성 로직 개선
+    public void setBoard(Board board) {
+        this.board = board;
+        board.getArticles().add(this);
+
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+        board.getArticles().add(this);
+    }
 }

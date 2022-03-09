@@ -1,11 +1,13 @@
 package com.jym.langCM02.controller;
 
 import com.jym.langCM02.domain.Article;
+import com.jym.langCM02.domain.Board;
 import com.jym.langCM02.domain.Member;
 import com.jym.langCM02.dto.article.ArticleDTO;
 import com.jym.langCM02.dto.article.ArticleModifyForm;
 import com.jym.langCM02.dto.article.ArticleSaveForm;
 import com.jym.langCM02.service.ArticleService;
+import com.jym.langCM02.service.BoardService;
 import com.jym.langCM02.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,49 +24,42 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class ArticleController { // 8-3-5
+public class ArticleController {
 
     private final ArticleService articleService;
     private final MemberService memberService;
+    private final BoardService boardService;
 
     @GetMapping("/articles/write")
     public String showArticleWrite(Model model) {
-
         model.addAttribute("articleSaveForm", new ArticleSaveForm());
-
         return "usr/article/write";
-
     }
-
     @PostMapping("/articles/write")
     public String doWrite(@Validated ArticleSaveForm articleSaveForm, BindingResult bindingResult, Model model, Principal principal) {
-
-        if(bindingResult.hasErrors()){
-            return "usr/article/write"; // write.html 만들어야 함
+        if (bindingResult.hasErrors()) {
+            return "usr/article/write";
         }
 
         try {
+
+            Board findBoard = boardService.getBoard(articleSaveForm.getBoard_id());
             Member findMember = memberService.findByLoginId(principal.getName());
 
             articleService.save(
                     articleSaveForm,
-                    findMember
+                    findMember,
+                    findBoard
             );
 
-        } catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             model.addAttribute("err_msg", e.getMessage());
             return "usr/article/write";
-
         }
         return "redirect:/";
-
-
     }
-
-    // 19-4 게시물 수정 구현
     @GetMapping("/articles/modify/{id}")
     public String showModify(@PathVariable(name = "id") Long id, Model model){
-
         try {
             Article article = articleService.getById(id);
             model.addAttribute("articleModifyForm", new ArticleModifyForm(
@@ -76,55 +71,42 @@ public class ArticleController { // 8-3-5
             return "redirect:/";
         }
     }
-
     @PostMapping("/articles/modify/{id}")
     public String doModify(@PathVariable(name = "id") Long id, ArticleModifyForm articleModifyForm){
-
         try{
             articleService.modifyArticle(articleModifyForm, id);
             return "redirect:/article/"+ id;
         }catch (Exception e){
             return "usr/article/modify";
         }
-
     }
-
-    // 20-3 게시물 리스트 구현
     @GetMapping("/articles/")
-    public String showList(Model model){
-
+    public String showList(Model model) {
         List<ArticleDTO> articleList = articleService.getList();
         model.addAttribute("articleList", articleList);
-
         return "usr/article/list";
     }
-
-    // 21-1 게시물 삭제 구현
     @GetMapping("/articles/delete/{id}")
-    public String deleteArticle(@PathVariable(name = "id") Long id, Principal principal) {
+    public String deleteArticle(@PathVariable(name = "id") Long id, Principal principal){
         try {
             ArticleDTO article = articleService.getArticle(id);
-
-            if(article.getAuthorName() != principal.getName()) {
+            if(article.getAuthorName() != principal.getName()){
                 return "redirect:/";
             }
             articleService.delete(id);
             return "redirect:/";
-
-        } catch (Exception e) {
+        }catch (Exception e){
             return "redirect:/";
         }
     }
-
-    public String showDetail(@PathVariable(name="id") Long id, Model model) {
+    @GetMapping("/articles/{id}")
+    public String showDetail(@PathVariable(name = "id") Long id, Model model){
         try {
             ArticleDTO findArticle = articleService.getArticle(id);
             model.addAttribute("article", findArticle);
-
             return "usr/article/detail";
-        } catch (Exception e) {
+        }catch (Exception e){
             return "redirect:/";
         }
     }
-
 }
