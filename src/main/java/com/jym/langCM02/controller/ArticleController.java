@@ -27,27 +27,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArticleController {
 
-
     private final ArticleService articleService;
     private final MemberService memberService;
     private final BoardService boardService;
 
-
     @GetMapping("/boards/{id}/articles/write")
     public String showArticleWrite(@PathVariable(name = "id")Long id, Model model) {
-
         BoardDTO boardDetail = boardService.getBoardDetail(id);
-
         model.addAttribute("board", boardDetail);
         model.addAttribute("articleSaveForm", new ArticleSaveForm());
-
         return "usr/article/write";
-
     }
-
-   @PostMapping("/boards/{id}/articles/write")
+    @PostMapping("/boards/{id}/articles/write")
     public String doWrite(@Validated ArticleSaveForm articleSaveForm, BindingResult bindingResult, Model model, Principal principal, @PathVariable(name = "id")Long id) {
-
         if (bindingResult.hasErrors()) {
             return "usr/article/write";
         }
@@ -62,13 +54,9 @@ public class ArticleController {
         } catch (IllegalStateException e) {
             model.addAttribute("err_msg", e.getMessage());
             return "usr/article/write";
-
         }
-
         return "redirect:/articles";
-
     }
-
     @GetMapping("/articles/modify/{id}")
     public String showModify(@PathVariable(name = "id") Long id, Model model){
         try {
@@ -91,12 +79,16 @@ public class ArticleController {
             return "usr/article/modify";
         }
     }
-
     @GetMapping("/articles")
     public String showList(Model model) {
 
         List<ArticleDTO> articleList = articleService.getList();
+
+        ArticleDTO articleDTO = articleList.get(0);
+
+        model.addAttribute("boardName", articleDTO.getBoardName());
         model.addAttribute("articleList", articleList);
+
         return "usr/article/list";
     }
     @GetMapping("/articles/delete/{id}")
