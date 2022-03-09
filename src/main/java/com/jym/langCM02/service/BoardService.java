@@ -68,9 +68,9 @@ public class BoardService {
 
     // // 17-4 게시판 수정 구현
     @Transactional
-    public Long modify(BoardModifyForm boardModifyForm) throws NoSuchElementException {
+    public Long modify(Long id, BoardModifyForm boardModifyForm) throws NoSuchElementException{
 
-        Optional<Board> boardOptional = boardRepository.findByName(boardModifyForm.getName());
+        Optional<Board> boardOptional = boardRepository.findById(id);
 
         boardOptional.orElseThrow(
                 () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다.")
@@ -89,7 +89,9 @@ public class BoardService {
     // 18-1 게시판 삭제 구현
     @Transactional
     public void delete(Long id) {
+
         Optional<Board> boardOptional = findById(id);
+
         boardOptional.orElseThrow(
                 () -> new NoSuchElementException("해당 게시판은 존재하지 않습니다.")
         );

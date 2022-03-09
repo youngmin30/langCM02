@@ -1,11 +1,13 @@
 package com.jym.langCM02.dto.article;
 
 import com.jym.langCM02.domain.Article;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 public class ArticleListDTO {
 
     private Long id;
