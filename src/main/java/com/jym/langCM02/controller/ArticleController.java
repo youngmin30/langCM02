@@ -35,6 +35,7 @@ public class ArticleController {
         model.addAttribute("articleSaveForm", new ArticleSaveForm());
         return "usr/article/write";
     }
+
     @PostMapping("/articles/write")
     public String doWrite(@Validated ArticleSaveForm articleSaveForm, BindingResult bindingResult, Model model, Principal principal) {
         if (bindingResult.hasErrors()) {
@@ -80,12 +81,14 @@ public class ArticleController {
             return "usr/article/modify";
         }
     }
+
     @GetMapping("/articles/")
     public String showList(Model model) {
         List<ArticleDTO> articleList = articleService.getList();
         model.addAttribute("articleList", articleList);
         return "usr/article/list";
     }
+
     @GetMapping("/articles/delete/{id}")
     public String deleteArticle(@PathVariable(name = "id") Long id, Principal principal){
         try {
@@ -99,6 +102,7 @@ public class ArticleController {
             return "redirect:/";
         }
     }
+
     @GetMapping("/articles/{id}")
     public String showDetail(@PathVariable(name = "id") Long id, Model model){
         try {

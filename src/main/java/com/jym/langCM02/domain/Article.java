@@ -33,7 +33,7 @@ public class Article { // 8-3-1 Article 객체 만들기
 
 
     // 생성 메소드
-    public static Article createArticle(String title, String body){
+    public static Article createArticle(String title, String body) {
 
         Article article = new Article();
 
@@ -44,7 +44,7 @@ public class Article { // 8-3-1 Article 객체 만들기
     }
 
     // 19-2 게시물 수정 구현
-    public void modifyArticle(String title, String body){
+    public void modifyArticle(String title, String body) {
         this.title = title;
         this.body = body;
 
@@ -62,10 +62,5 @@ public class Article { // 8-3-1 Article 객체 만들기
         this.board = board;
         board.getArticles().add(this);
 
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
-        board.getArticles().add(this);
     }
 }
