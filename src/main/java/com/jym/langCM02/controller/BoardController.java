@@ -74,7 +74,7 @@ public class BoardController { // 13-6
             return "adm/board/modify";
         }
 
-        return "redirect:/";
+        return "redirect:/adm/boards"; // 23-1 게시판 리스트 페이지 구현
     }
 
     // 19-5 게시물 수정 구현에서 삭제함
