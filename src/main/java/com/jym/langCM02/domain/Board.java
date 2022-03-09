@@ -36,4 +36,12 @@ public class Board { // 13-1 게시판 생성 구현
 
     }
 
+    // 17-1 게시판 수정 구현
+    public void modifyBoard(String name, String detail) {
+        this.name = name;
+        this.detail = detail;
+
+        this.updateDate = LocalDateTime.now();
+    }
+
 }
